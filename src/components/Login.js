@@ -1,12 +1,78 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { BG_URL } from "../utils/Constants";
+import { checkValidData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const name = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
+  };
+
+  const handleUserLogin = () => {
+    // Validate the Form Data
+    const nameValue = name.current ? name.current.value : "";
+    const message = checkValidData(
+      nameValue,
+      email.current.value,
+      password.current.value
+    );
+    console.log(message);
+    setErrorMessage(message);
+    if (message) return;
+
+    if (!isSignInForm) {
+      // Sign Up Logic
+
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          // ...
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+          setErrorMessage(`${errorCode} : ${errorMessage}`);
+        });
+    } else {
+      // Sign In Logic
+
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(`${errorCode} : ${errorMessage}`);
+        });
+    }
   };
 
   return (
@@ -24,6 +90,7 @@ const Login = () => {
         </h1>
         {!isSignInForm && (
           <input
+            ref={name}
             type="text"
             placeholder="Full Name"
             className="p-4 my-3 w-full bg-[#161514] rounded-sm bg-opacity-70"
@@ -31,18 +98,24 @@ const Login = () => {
           />
         )}
         <input
+          ref={email}
           type="text"
           placeholder="Email"
           className="p-4 my-3 w-full bg-[#161514] rounded-sm bg-opacity-70"
           required
         />
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           className="p-4 mt-3 w-full bg-[#161514] rounded-sm bg-opacity-70"
           required
         />
-        <button className="my-3 px-4 py-2 bg-[#C11119] w-full rounded-sm text-center">
+        <p className="text-[#C11119] text-sm py-2">{errorMessage}</p>
+        <button
+          className="my-3 px-4 py-2 bg-[#C11119] w-full rounded-sm text-center"
+          onClick={handleUserLogin}
+        >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         {isSignInForm ? (
