@@ -36,7 +36,7 @@ const Login = () => {
       email.current.value,
       password.current.value
     );
-    console.log(message);
+    // console.log(message);
     setErrorMessage(message);
     if (message) return;
 
@@ -75,7 +75,6 @@ const Login = () => {
               const errorMessage = error.message;
               setErrorMessage(`${errorCode} : ${errorMessage}`);
             });
-          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -95,7 +94,6 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           // ...
-          console.log(user);
           navigate("/browse");
         })
         .catch((error) => {
