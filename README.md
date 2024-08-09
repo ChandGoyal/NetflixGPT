@@ -19,14 +19,21 @@
 - Unsubscribed to the onAuthStateChanged callback
 - Register TMDB API & create an app & get access token
 - Get Data from TMDB (Movie Lists -> Now Playing) API
-- Custom Hook for Now Playing Movies
+- Create useNowPlayingMovies - Custom Hook for Now Playing Movies
 - Create movieSlice
 - Update Store with movies Data
 - Planning for MainContainer & secondary container
 - Fetch Data for Trailer Video
 - Update Store with Trailer Video Data
 - Embedded the Youtube video and make it autoplay and mute and on loop without controls
+- useMovieTrailer - Custom Hook to display and play video in background
 - Tailwind Classes to make Main Container look awesome
+- Build Secondary Component
+- Build Movies List
+- Build Movie Card
+- TMDB Image CDN URL
+- Made the Browse page amazing with Tailwind CSS
+- useMostPopularMovies, useTopRatedMovies, useUpcomingMovies Custom hooks for Most Popular, Top Rated and Upcoming Movies
 
 # Features
 
