@@ -29,7 +29,7 @@
 - useMovieTrailer - Custom Hook to display and play video in background
 - Tailwind Classes to make Main Container look awesome
 - Build Secondary Component
-- Build Movies List
+- Build Movies List with Scrolling horizontally based on vertical scroll functionality for Cards Container while disabling page scrolling when the cursor is inside the cards container
 - Build Movie Card
 - TMDB Image CDN URL
 - Made the Browse page amazing with Tailwind CSS
