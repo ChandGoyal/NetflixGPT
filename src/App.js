@@ -3,7 +3,7 @@ import Body from "./components/Body";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 
-console.log("API Key:", process.env.TMDB_API);
+console.log("API Key:", process.env.NEXT_PUBLIC_TMDB_API);
 
 function App() {
   return (
