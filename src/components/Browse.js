@@ -1,11 +1,14 @@
 import React from "react";
 import Header from "./Header";
+import Footer from "./Footer";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
 import useMostPopularMovies from "../hooks/useMostPopularMovies";
 import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
+import GPTSearch from "./GPTSearch";
+import { useSelector } from "react-redux";
 
 const Browse = () => {
   useNowPlayingMovies();
@@ -13,11 +16,22 @@ const Browse = () => {
   useTopRatedMovies();
   useUpcomingMovies();
 
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+
   return (
     <div className="bg-[#141414]">
       <Header />
-      <MainContainer />
-      <SecondaryContainer />
+      {showGptSearch ? (
+        <>
+          <GPTSearch />
+        </>
+      ) : (
+        <>
+          <MainContainer />
+          <SecondaryContainer />
+          <Footer />
+        </>
+      )}
       {/* 
       MainContainer
         - Video Background
