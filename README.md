@@ -73,4 +73,4 @@
 0. Install firebase CLI using `npm install -g firebase-tools`
 1. Firebase Login - `firebase login`
 2. Initialize Firebase - `firebase init` - Configure carefully as per requirements
-3. Deploy Command - `firebase deploy`
+3. Deploy Command - `firebase deploy` 
